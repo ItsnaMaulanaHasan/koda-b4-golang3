@@ -15,7 +15,7 @@ func main()  {
 		fmt.Print("Enter the name you want to search for (0. exit): ")
 		fmt.Scan(&inputNama)
 		if (inputNama != "0"){
-			result, err := Search.SearchPerson(users, inputNama)
+			result, err := Search.SearchPerson(users, &inputNama)
 			if err != nil {
 				fmt.Println(err.Error())
 			} else {

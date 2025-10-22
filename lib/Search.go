@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func SearchPerson(users []string, name string) (result []string, err error) {
+func SearchPerson(users []string, name *string) (result []string, err error) {
 	defer func (){
 		r := recover()
 		if r != nil {
@@ -14,13 +14,13 @@ func SearchPerson(users []string, name string) (result []string, err error) {
 	}()
 	found := false
 	for x := range len(users) {
-		if (strings.EqualFold(users[x], name)){
+		if (strings.EqualFold(users[x], *name)){
 			result = append(result, users[x])
 			found = true
 		}
 	}
 	if !found {
-		panic(name)
+		panic(*name)
 	} 
 	return result, err
 }
