@@ -6,6 +6,7 @@ import (
 )
 
 func main()  {
+	defer fmt.Println("Exit")
 	users := []string{"Itsna", "Federus", "Yoga", "Fiki", "Sidik", "Ari"}
 	loop := true
 
@@ -14,8 +15,12 @@ func main()  {
 		fmt.Print("Enter the name you want to search for (0. exit): ")
 		fmt.Scan(&inputNama)
 		if (inputNama != "0"){
-			result := Search.SearchPerson(users, inputNama)
-			fmt.Println(result)
+			result, err := Search.SearchPerson(users, inputNama)
+			if err != nil {
+				fmt.Println(err.Error())
+			} else {
+				fmt.Println(result)
+			}
 		} else {
 			loop = false
 		}

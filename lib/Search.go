@@ -1,14 +1,26 @@
 package Search
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
-func SearchPerson(users []string, name string) []string {
-	var result []string
+func SearchPerson(users []string, name string) (result []string, err error) {
+	defer func (){
+		r := recover()
+		if r != nil {
+			err = fmt.Errorf("%s not found", r)
+		}
+	}()
+	found := false
 	for x := range len(users) {
 		if (strings.EqualFold(users[x], name)){
 			result = append(result, users[x])
-			return result
+			found = true
 		}
 	}
-	return result
+	if !found {
+		panic(name)
+	} 
+	return result, err
 }
